@@ -1,4 +1,7 @@
-﻿Console.WriteLine("Boas vindas ao ByteBankm Atendimento.");
+﻿using bytebank.Modelos.Conta;
+using bytebank.Utils;
+
+Console.WriteLine("Boas vindas ao ByteBankm Atendimento.");
 
 int idade0 = 30;
 int idade1 = 40;
@@ -82,3 +85,30 @@ void TestaMediana(Array array)
 // {
 //     Console.WriteLine($"{valores[i]}");
 // }
+
+//AULA 2
+void TestaArrayDeContasCorrentes()
+{
+    ListaDeContasCorrentes listaDeContas = new ListaDeContasCorrentes();
+    listaDeContas.Adicionar(new ContaCorrente(874, "5679787-A"));
+    listaDeContas.Adicionar(new ContaCorrente(875, "445668-A"));
+    listaDeContas.Adicionar(new ContaCorrente(876, "445669-A"));
+    listaDeContas.Adicionar(new ContaCorrente(877, "445670-A"));
+    listaDeContas.Adicionar(new ContaCorrente(878, "445671-A"));
+    listaDeContas.Adicionar(new ContaCorrente(879, "445672-A"));
+    listaDeContas.Adicionar(new ContaCorrente(880, "445673-A"));
+    var contaExclusao = new ContaCorrente(675, "123456-Z");
+    listaDeContas.Adicionar(contaExclusao);
+
+    // listaDeContas.ExibeLista();
+    // listaDeContas.Remover(contaExclusao);
+    // Console.WriteLine("============================");
+    // listaDeContas.ExibeLista();
+
+    for (int i = 0; i < listaDeContas.Tamanho; i++)
+    {
+        var conta = listaDeContas[i];
+        Console.WriteLine($"índice {i} - {conta.Conta}/{conta.Numero_agencia}");
+    }
+}
+TestaArrayDeContasCorrentes();
