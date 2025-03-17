@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using bytebank.Exceptions;
 using bytebank.Modelos.Conta;
 using bytebank.Utils;
 
@@ -117,16 +118,24 @@ void TestaArrayDeContasCorrentes()
 // TestaArrayDeContasCorrentes();
 #endregion
 
-ArrayList listaDeContas = new();
+List<ContaCorrente> listaDeContas = new()
+{
+    new ContaCorrente(95, "123456-X") { Saldo = 100 },
+    new ContaCorrente(96, "789001-Y") { Saldo = 200 },
+    new ContaCorrente(97, "706235-Z") { Saldo = 300 },
+};
+
 Atendimento();
 void Atendimento()
 {
-    char opcao = '0';
-    while (opcao != '6')
+    try
     {
-        Console.Clear();
-        Console.WriteLine(
-            @"
+        char opcao = '0';
+        while (opcao != '6')
+        {
+            Console.Clear();
+            Console.WriteLine(
+                @"
         ========================================
         ====            Atendimento         ====
         ==== 1 - Cadastrar conta            ====
@@ -138,37 +147,51 @@ void Atendimento()
         ========================================
         Digite a opção desejada:
         "
-        );
-        opcao = Console.ReadLine()![0];
-        switch (opcao)
-        {
-            case '1':
-                CadastrarConta();
-                break;
-            case '2':
-                ListarContas();
-                break;
-            case '3':
+            );
+            try
+            {
+                opcao = Console.ReadLine()![0];
+            }
+            catch (Exception ex)
+            {
+                throw new ByteBankExceptions(ex.Message);
+            }
+            switch (opcao)
+            {
+                case '1':
+                    CadastrarConta();
+                    break;
+                case '2':
+                    ListarContas();
+                    break;
+                case '3':
 
-                break;
-            case '4':
+                    break;
+                case '4':
 
-                break;
-            case '5':
+                    break;
+                case '5':
 
-                break;
-            case '6':
+                    break;
+                case '6':
 
-                break;
-            default:
-                Console.WriteLine("Opção não implementada");
-                break;
+                    break;
+                default:
+                    Console.WriteLine("Opção não implementada");
+                    break;
+            }
         }
     }
+    catch (ByteBankExceptions ex)
+    {
+        Console.WriteLine($"{ex.Message}");
+    }
+
 }
 
 void ListarContas()
 {
+    Console.Clear();
     if (listaDeContas.Count <= 0)
     {
         Console.WriteLine("...Não há contas cadastradas...");

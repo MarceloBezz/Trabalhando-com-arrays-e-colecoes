@@ -99,6 +99,7 @@
         {
             return $" === DADOS DA CONTA === \n"
                 + $"Número da Conta : {Conta} \n"
+                + $"Saldo da Conta : {Saldo} \n"
                 + $"Titular da Conta: {Titular.Nome} \n"
                 + $"CPF do Titular  : {Titular.Cpf} \n"
                 + $"Profissão do Titular: {Titular.Profissao}";
