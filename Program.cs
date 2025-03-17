@@ -1,4 +1,5 @@
-﻿using bytebank.Modelos.Conta;
+﻿using System.Collections;
+using bytebank.Modelos.Conta;
 using bytebank.Utils;
 
 Console.WriteLine("Boas vindas ao ByteBankm Atendimento.");
@@ -9,6 +10,7 @@ int idade2 = 17;
 int idade3 = 21;
 int idade4 = 18;
 
+# region Exemplos Arrays
 void TestarArrayInt()
 {
     int[] idades = [idade0, idade1, idade2, idade3, idade4];
@@ -76,6 +78,7 @@ void TestaMediana(Array array)
         Console.WriteLine($"Com base na amostra, a mediana é igual a {mediana}");
     }
 }
+
 // TestaMediana(amostra);
 
 // System.IndexOutOfRangeException:
@@ -111,4 +114,109 @@ void TestaArrayDeContasCorrentes()
         Console.WriteLine($"índice {i} - {conta.Conta}/{conta.Numero_agencia}");
     }
 }
-TestaArrayDeContasCorrentes();
+// TestaArrayDeContasCorrentes();
+#endregion
+
+ArrayList listaDeContas = new();
+Atendimento();
+void Atendimento()
+{
+    char opcao = '0';
+    while (opcao != '6')
+    {
+        Console.Clear();
+        Console.WriteLine(
+            @"
+        ========================================
+        ====            Atendimento         ====
+        ==== 1 - Cadastrar conta            ====
+        ==== 2 - Listar contas              ====
+        ==== 3 - Remover conta              ====
+        ==== 4 - Ordenar contas             ====
+        ==== 5 - Pesquisar conta            ====
+        ==== 6 - Sair do sistema            ====
+        ========================================
+        Digite a opção desejada:
+        "
+        );
+        opcao = Console.ReadLine()![0];
+        switch (opcao)
+        {
+            case '1':
+                CadastrarConta();
+                break;
+            case '2':
+                ListarContas();
+                break;
+            case '3':
+
+                break;
+            case '4':
+
+                break;
+            case '5':
+
+                break;
+            case '6':
+
+                break;
+            default:
+                Console.WriteLine("Opção não implementada");
+                break;
+        }
+    }
+}
+
+void ListarContas()
+{
+    if (listaDeContas.Count <= 0)
+    {
+        Console.WriteLine("...Não há contas cadastradas...");
+        Console.ReadKey();
+        return;
+    }
+    foreach (ContaCorrente conta in listaDeContas)
+    {
+        Console.WriteLine(conta.ToString());
+        Console.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>");
+        Console.ReadKey();
+    }
+}
+
+void CadastrarConta()
+{
+    Console.Clear();
+    Console.WriteLine(
+        @"
+    ===============================
+    === CADASTRO DE CONTAS      ===
+    ===============================
+    Informe dados da conta
+
+    "
+    );
+    Console.Write("Número da Conta: ");
+    string numeroConta = Console.ReadLine()!;
+
+    Console.Write("Número da Agência: ");
+    int numeroAgencia = int.Parse(Console.ReadLine()!);
+
+    ContaCorrente conta = new ContaCorrente(numeroAgencia, numeroConta);
+
+    Console.Write("Informe o saldo inicial: ");
+    conta.Saldo = double.Parse(Console.ReadLine()!);
+
+    Console.Write("Informe o nome do titular: ");
+    conta.Titular.Nome = Console.ReadLine()!;
+
+    Console.Write("Informe o CPF do titular: ");
+    conta.Titular.Cpf = Console.ReadLine()!;
+
+    Console.Write("Informe profissão do titular: ");
+    conta.Titular.Profissao = Console.ReadLine()!;
+
+    listaDeContas.Add(conta);
+    Console.WriteLine("...Conta cadastrada com sucesso!...");
+    Console.WriteLine("...Aperte qualquer tecla para sair...");
+    Console.ReadKey();
+}

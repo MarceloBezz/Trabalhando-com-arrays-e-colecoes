@@ -91,16 +91,17 @@
         {
             Numero_agencia = numero_agencia;
             Conta = conta;
+            Titular = new Cliente();
             TotalDeContasCriadas += 1;
         }
 
         public override string ToString()
         {
             return $" === DADOS DA CONTA === \n"
-                + $"Número da Conta : {this.Conta} \n"
-                + $"Titular da Conta: {this.Titular.Nome} \n"
-                + $"CPF do Titular  : {this.Titular.Cpf} \n"
-                + $"Profissão do Titular: {this.Titular.Profissao}";
+                + $"Número da Conta : {Conta} \n"
+                + $"Titular da Conta: {Titular.Nome} \n"
+                + $"CPF do Titular  : {Titular.Cpf} \n"
+                + $"Profissão do Titular: {Titular.Profissao}";
         }
     }
 }
