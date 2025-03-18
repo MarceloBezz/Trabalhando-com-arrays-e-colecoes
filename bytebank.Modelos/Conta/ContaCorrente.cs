@@ -87,7 +87,7 @@
             return true;
         }
 
-        public ContaCorrente(int numero_agencia, string conta)
+        public ContaCorrente (int numero_agencia, string conta)
         {
             Numero_agencia = numero_agencia;
             Conta = conta;
@@ -99,6 +99,7 @@
         {
             return $" === DADOS DA CONTA === \n"
                 + $"Número da Conta : {Conta} \n"
+                + $"Número da Agência : {Numero_agencia} \n"
                 + $"Saldo da Conta : {Saldo} \n"
                 + $"Titular da Conta: {Titular.Nome} \n"
                 + $"CPF do Titular  : {Titular.Cpf} \n"
@@ -116,6 +117,5 @@
                 return Numero_agencia.CompareTo(other.Numero_agencia);
             }
         }
-
     }
 }
