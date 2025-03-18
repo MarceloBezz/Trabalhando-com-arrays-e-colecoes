@@ -1,6 +1,6 @@
 ﻿namespace bytebank.Modelos.Conta
 {
-    public class ContaCorrente
+    public class ContaCorrente : IComparable<ContaCorrente>
     {
         private int _numero_agencia;
 
@@ -104,5 +104,18 @@
                 + $"CPF do Titular  : {Titular.Cpf} \n"
                 + $"Profissão do Titular: {Titular.Profissao}";
         }
+
+        public int CompareTo(ContaCorrente? other)
+        {
+            if (other == null)
+            {
+                return 1;
+            }
+            else
+            {
+                return Numero_agencia.CompareTo(other.Numero_agencia);
+            }
+        }
+
     }
 }
